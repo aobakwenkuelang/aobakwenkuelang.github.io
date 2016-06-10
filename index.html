@@ -1,0 +1,774 @@
+
+
+
+<!DOCTYPE HTML>
+<html>
+  <head>
+   <style>
+	  body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #F0F0F0;
+        }
+
+
+
+
+#container {
+    position:absolute;
+   
+}
+
+
+
+draggable {
+	background-color: blue
+}
+
+
+
+
+
+
+a.button {
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #3498db;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right:0;
+  text-align: center;
+  
+  
+}
+
+a.button:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+	  </style>
+  </head>
+  <body>
+	  
+	  <div id="container"></div>
+    <canvas id="kanvas" width="1340" height="612"></canvas>
+   
+	
+	  
+	
+	 
+	  
+    <script src="https://cdn.rawgit.com/konvajs/konva/0.13.0/konva.min.js"></script>
+	  
+	<script>
+	  var canvas = document.getElementById('kanvas');
+      var ctx = canvas.getContext('2d');
+
+//Mhele Text
+ctx.font = "50px Arial";
+ctx.fillText("MHELE", 570,320);
+
+//game surface
+
+//outer top 
+      ctx.beginPath();
+      ctx.moveTo(100, 50);
+      ctx.lineTo(1240, 50);
+	  ctx.lineWidth = 10;
+      ctx.stroke();
+//outer left
+	  ctx.beginPath();
+      ctx.moveTo(100, 50);
+      ctx.lineTo(100, 562);
+	  ctx.lineWidth = 10;
+      ctx.stroke();
+//outer bottom
+	  ctx.beginPath();
+      ctx.moveTo(100, 562);
+      ctx.lineTo(1240, 562);
+	  ctx.lineWidth = 10;
+      ctx.stroke();
+//outer right	  
+ 	  ctx.beginPath();
+      ctx.moveTo(1240, 50);
+      ctx.lineTo(1240, 562);
+	  ctx.lineWidth = 10;
+      ctx.stroke();
+//middle left
+	  ctx.beginPath();
+      ctx.moveTo(200, 125);
+      ctx.lineTo(200, 487);
+	  ctx.lineWidth = 10;
+      ctx.stroke();
+//middle bottom	  
+	  ctx.beginPath();
+      ctx.moveTo(200, 487);
+      ctx.lineTo(1140, 487);
+	  ctx.lineWidth = 10;
+      ctx.stroke();
+//middle right		
+	  ctx.beginPath();
+      ctx.moveTo(1140, 487);
+      ctx.lineTo(1140, 125);
+	  ctx.lineWidth = 10;
+      ctx.stroke();
+//middle top
+	  ctx.beginPath();
+      ctx.moveTo(1140, 125);
+      ctx.lineTo(200, 125);
+	  ctx.lineWidth = 10;
+      ctx.stroke();
+//inner left
+	  ctx.beginPath();
+      ctx.moveTo(300, 200);
+      ctx.lineTo(300, 412);
+	  ctx.lineWidth = 10;
+      ctx.stroke();
+//inner bottom
+	  ctx.beginPath();
+      ctx.moveTo(300, 412);
+      ctx.lineTo(1040, 412);
+	  ctx.lineWidth = 10;
+      ctx.stroke();
+//inner right
+	  ctx.beginPath();
+      ctx.moveTo(1040, 412);
+      ctx.lineTo(1040, 200);
+	  ctx.lineWidth = 10;
+      ctx.stroke();
+//inner top
+	  ctx.beginPath();
+      ctx.moveTo(1040, 200);
+      ctx.lineTo(300, 200);
+	  ctx.lineWidth = 10;
+      ctx.stroke();
+//top left diagonal
+	  ctx.beginPath();
+      ctx.moveTo(100, 50);
+      ctx.lineTo(300, 200);
+	  ctx.lineWidth = 10;
+      ctx.stroke();
+//left horizontal
+	  ctx.beginPath();
+      ctx.moveTo(100, 306);
+      ctx.lineTo(300, 306);
+	  ctx.lineWidth = 10;
+      ctx.stroke();
+//right horizontal
+	  ctx.beginPath();
+      ctx.moveTo(1040, 306);
+      ctx.lineTo(1240, 306);
+	  ctx.lineWidth = 10;
+      ctx.stroke();
+//bottom left diagonal
+	  ctx.beginPath();
+      ctx.moveTo(100, 562);
+      ctx.lineTo(300, 412);
+	  ctx.lineWidth = 10;
+      ctx.stroke();
+//bottom vertical
+	  ctx.beginPath();
+      ctx.moveTo(670, 412);
+      ctx.lineTo(670, 562);
+	  ctx.lineWidth = 10;
+      ctx.stroke();
+//top vertical
+	  ctx.beginPath();
+      ctx.moveTo(670, 50);
+      ctx.lineTo(670, 200);
+	  ctx.lineWidth = 10;
+      ctx.stroke();
+//bottom right diagonal
+	  ctx.beginPath();
+      ctx.moveTo(1240, 562);
+      ctx.lineTo(1040, 412);
+	  ctx.lineWidth = 10;
+      ctx.stroke();
+//top right diagonal
+	  ctx.beginPath();
+      ctx.moveTo(1240, 50);
+      ctx.lineTo(1040, 200);
+	  ctx.lineWidth = 10;
+      ctx.stroke();
+
+
+
+
+
+	  
+	  </script>  
+    
+    
+
+
+
+<div id="container"></div>
+<script>
+	  //game pieces below player 1 game  pieces are labelled box while player 2 game pieces are labelled square
+var width = window.innerWidth;
+    var height = window.innerHeight;
+
+    var stage = new Konva.Stage({
+        container: 'container',
+        width: width,
+        height: height
+    });
+
+    var layer = new Konva.Layer();
+  
+//player 1
+    var box = new Konva.Rect({
+        x: 350,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#00AAFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    box.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    box.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(box);
+    stage.add(layer);
+
+
+   var box = new Konva.Rect({
+        x: 350,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#00AAFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    box.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    box.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(box);
+    stage.add(layer);
+
+
+   var box = new Konva.Rect({
+        x: 350,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#00AAFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    box.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    box.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(box);
+    stage.add(layer);
+   var box = new Konva.Rect({
+        x: 350,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#00AAFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    box.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    box.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(box);
+    stage.add(layer);
+
+
+   var box = new Konva.Rect({
+        x: 350,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#00AAFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    box.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    box.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(box);
+    stage.add(layer);
+
+
+   var box = new Konva.Rect({
+        x: 350,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#00AAFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    box.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    box.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(box);
+    stage.add(layer);
+
+
+   var box = new Konva.Rect({
+        x: 350,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#00AAFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    box.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    box.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(box);
+    stage.add(layer);
+
+
+   var box = new Konva.Rect({
+        x: 350,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#00AAFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    box.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    box.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(box);
+    stage.add(layer);
+
+
+   var box = new Konva.Rect({
+        x: 350,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#00AAFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    box.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    box.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+
+    layer.add(box);
+    stage.add(layer);
+   var box = new Konva.Rect({
+        x: 350,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#00AAFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    box.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    box.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(box);
+    stage.add(layer);
+
+
+   var box = new Konva.Rect({
+        x: 350,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#00AAFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    box.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    box.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(box);
+    stage.add(layer);
+
+
+   var box = new Konva.Rect({
+        x: 350,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#00AAFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    box.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    box.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(box);
+    stage.add(layer);
+
+//player 2
+var square = new Konva.Rect({
+        x: 940,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#FFFFFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    square.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    square.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(square);
+    stage.add(layer);
+
+var square = new Konva.Rect({
+        x: 940,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#FFFFFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    square.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    square.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(square);
+    stage.add(layer);
+
+var square = new Konva.Rect({
+        x: 940,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#FFFFFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    square.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    square.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(square);
+    stage.add(layer);
+
+var square = new Konva.Rect({
+        x: 940,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#FFFFFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    square.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    square.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(square);
+    stage.add(layer);
+
+var square = new Konva.Rect({
+        x: 940,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#FFFFFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    square.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    square.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(square);
+    stage.add(layer);
+
+var square = new Konva.Rect({
+        x: 940,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#FFFFFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    square.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    square.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(square);
+    stage.add(layer);
+
+var square = new Konva.Rect({
+        x: 940,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#FFFFFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    square.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    square.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(square);
+    stage.add(layer);
+
+var square = new Konva.Rect({
+        x: 940,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#FFFFFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    square.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    square.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(square);
+    stage.add(layer);
+
+var square = new Konva.Rect({
+        x: 940,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#FFFFFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    square.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    square.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(square);
+    stage.add(layer);
+
+var square = new Konva.Rect({
+        x: 940,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#FFFFFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    square.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    square.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(square);
+    stage.add(layer);
+
+var square = new Konva.Rect({
+        x: 940,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#FFFFFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    square.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    square.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(square);
+    stage.add(layer);
+
+var square = new Konva.Rect({
+        x: 940,
+        y: 281,
+        width: 50,
+        height: 50,
+        fill: '#FFFFFF',
+        stroke: 'black',
+        strokeWidth: 4,
+        draggable: true
+    });
+
+    // add cursor styling
+    square.on('mouseover', function() {
+        document.body.style.cursor = 'pointer';
+    });
+    square.on('mouseout', function() {
+        document.body.style.cursor = 'default';
+    });
+
+    layer.add(square);
+    stage.add(layer);
+	  </script>
+
+ <a href=https://web.facebook.com/nkuelang class="button">Developed By</a>	  
+
+  </body>
+</html>      
