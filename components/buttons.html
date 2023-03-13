@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Romeo Nkuelang - Design System</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+
+    <!-- This is where you put your google font in if applicable -->
+<!--     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet"> -->
+
+<!-- This is the link to the toggle hamburger -->
+	 <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  </head>
+  <body>
+    
+    <div class="d-flex">
+      <nav id="sidebar">
+        <div class="custom-menu">
+          <button type="button" id="sidebarCollapse" class="toggle-btn">
+              <span class="sr-only">Toggle Menu</span>
+                    <div id="nav-icon1" >
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+               </button>
+          </div>
+		<div class="p-4 pt-6">
+		  <a href="index.html" class="logo"><img width="80%" src="img/blackandwhitelogo.png" alt=""></a>
+
+	       <ul class="list-unstyled components">
+	     
+	          <li class="active">
+	            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Foundations</a>
+	            
+			            <ul class="collapse list-unstyled" id="homeSubmenu">
+		                <li>
+		                    <a href="../foundation/type.html">Typography</a>
+		                </li>
+		                <li>
+		                    <a href="../foundation/color.html">Color</a>
+		                </li>
+		                <li>
+		                    <a href="../foundation/logo.html">Logo</a>
+		                </li>
+			            </ul>
+	          </li>
+	          
+	          <li>
+              <a href="#ComponentsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Components</a>
+              <ul class="collapse.show list-unstyled" id="ComponentsSubmenu">
+               <li>
+                    <a href="navigation.html">Navigation</a>
+                </li>
+                <li>
+                    <a href="component2.html">Footers</a>
+                </li>
+                <li>
+                    <a href="#">Buttons</a>
+                </li>
+                <li>
+                  <a href="../components/cards.html">Cards</a>
+              </li>
+              </ul>
+	          </li>
+
+	          <li>
+              <a href="#PatternsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Patterns</a>
+              <ul class="collapse list-unstyled" id="PatternsSubmenu">
+                 <li>
+                    <a href="../patterns/pattern1.html">Homepage</a>
+                </li>
+              
+               
+              </ul>
+	          </li>
+	         
+	         
+	        </ul> 
+
+	      
+
+
+	      </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      <div class = "container">
+          <div class = "row p-5 pt-6">
+            <div id="content">
+
+              <h2>Buttons</h2>
+              <br>
+
+              <!-- Code example - this is what the prism.js and css are for added in this page - replace: all '<' with &lt; and  '>' with &gt; and all quotes with &quot; -->
+
+              <p style="margin-bottom: 48px; ;">This is a representation of the default button used within the site. The button is based on Bootstrap's default button class with additions made to match the style of my portfolio.</p>
+
+              <h4 style="margin-top: 48px; margin-bottom: 24px;"> Live Button</h4>
+
+              <button type="button" class="btn btn-lg type-montserrat" style="background-color: #fff; border: solid 2px black; border-radius: 5px; " >Button</button>
+
+              <h4 style="margin-top: 48px; margin-bottom: 24px;"> HTML Code</h4>
+              <p>This is needed for adding the button to our DOM.</p>
+
+            
+
+              <pre><code> &ltbutton type="button" class="btn btn-lg type-montserrat" style="background-color: #fff; border: solid 2px black; border-radius: 5px; " &gtButton&lt/ltbutton&gt </code></pre>
+
+              <h4 style="margin-top: 48px; margin-bottom: 24px;"> CSS Code</h4>
+              <p>This is needed for adding animation during the hover state.</p>
+
+              <pre><code> .btn:hover {
+                color: #000000;
+                transform: translateY(-7px);
+                box-shadow: 20px 20px #000000;
+              }</code></pre>
+        
+    
+        </div>      <!-- Content  -->
+      </div><!-- Row  -->
+    </div><!-- Container -->
+</div>
+
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>
